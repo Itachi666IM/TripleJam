@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public class Disciple
     {
         public string[] dialouges;
-        [HideInInspector]public int destiny;
         [HideInInspector]public int good;
         [HideInInspector]public int neutral;
         [HideInInspector]public int bad;
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject choicePanel;
     public GameObject choiceButton;
-    bool canChoose;
 
     public TMP_Text choice1;
     public TMP_Text choice2;
@@ -60,34 +58,6 @@ public class GameManager : MonoBehaviour
         if(dialogueText.text == currentDialogue)
         {
             continueButton.SetActive(true );
-        }
-
-        if(canChoose)
-        {
-            if(Input.GetKeyDown(KeyCode.Keypad1))
-            {
-                currentDisciple.good++;
-                currentDisciple.destiny++;
-                canChoose = false;
-                choicePanel.SetActive(false);
-                choiceButton.SetActive(true);
-            }
-            else if(Input.GetKeyDown(KeyCode.Keypad2))
-            {
-                currentDisciple.neutral++;
-                currentDisciple.destiny++;
-                canChoose=false;
-                choicePanel.SetActive(false);
-                choiceButton.SetActive(true);
-            }
-            else if(Input.GetKeyDown(KeyCode.Keypad3))
-            {
-                currentDisciple.bad++;
-                currentDisciple.destiny++;
-                canChoose=false;
-                choicePanel.SetActive(false);
-                choiceButton.SetActive(true);
-            }
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -134,7 +104,6 @@ public class GameManager : MonoBehaviour
             choice1.text = currentDisciple.goodChoices[choiceIndex];
             choice2.text = currentDisciple.neutralChoices[choiceIndex];
             choice3.text = currentDisciple.badChoices[choiceIndex];
-            canChoose = true;
         }
         else
         {
@@ -196,4 +165,18 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void GoodChoice()
+    {
+        currentDisciple.good++;
+    }
+
+    public void NeutralChoice()
+    {
+        currentDisciple.neutral++;
+    }
+
+    public void BadChoice()
+    {
+        currentDisciple.bad++;
+    }
 }
